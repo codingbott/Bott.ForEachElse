@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{DF77A46E-F155-4E77-86AE-C1251952D577}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="Demos\CliDemo.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Tests\ForEachElseTests.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="CliDemo">
+        <MSBuild Projects="Demos\CliDemo.dproj"/>
+    </Target>
+    <Target Name="CliDemo:Clean">
+        <MSBuild Projects="Demos\CliDemo.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="CliDemo:Make">
+        <MSBuild Projects="Demos\CliDemo.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ForEachElseTests">
+        <MSBuild Projects="Tests\ForEachElseTests.dproj"/>
+    </Target>
+    <Target Name="ForEachElseTests:Clean">
+        <MSBuild Projects="Tests\ForEachElseTests.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ForEachElseTests:Make">
+        <MSBuild Projects="Tests\ForEachElseTests.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="CliDemo;ForEachElseTests"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="CliDemo:Clean;ForEachElseTests:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="CliDemo:Make;ForEachElseTests:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
